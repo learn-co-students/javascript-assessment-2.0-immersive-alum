@@ -23,8 +23,12 @@ PostsController.prototype.destroyPostLiveEventListener = function(){
   });
 };
 
+PostsController.postEl = function(post) {
+  return '<div class="post"><h2><button class="destroy-post">x</button> '+post.title+'</h2><ul id="post-'+post.id+'" data-id="'+post.id+'"><img src="'+post.url+'"></img><p id="upvote-number-'+post.id+'"></p><button id="upvote-'+post.id+'" class="upvote" data-id="'+post.id+'">UpVote</button><p id="downvote-number-'+post.id+'"></p><button id="downvote-'+post.id+'" class="downvote" data-id="'+post.id+'">DownVote</button><ul id="comments-'+post.id+'"></ul><form id="add-comment" class="add-comment" data-id='+post.id+' action="#" method="post"><label for="comment-description">Comment: </label><input type="text" id="comment-description-'+post.id+'" class="user-text" name="comment-description" placeholder="comment"><input type="submit" value="(+) add comment"></form></ul></div>';
+};
+
 PostsController.render = function(post) {
-  $('#posts').append(post.postEl());
+  $('#posts').append(this.postEl(post));
 };
 
 PostsController.prototype.init = function() {
