@@ -1,7 +1,7 @@
 # JavaScript Assessment 2.0
 
-For this assignment, we'll be working with an Reddit-style domain. We have two models - Image, and Comment.
-For our purposes, an Image has many Comments, and a Comment belongs to an Image.
+For this assignment, we'll be working with an Reddit-style domain. We have three models - Post, Comment and Vote.
+For our purposes, a Post has many Comments, a Comment belongs to an Image, a Post has one Vote and a Vote belongs to a Post.
 
 ## Topics
 
@@ -18,26 +18,34 @@ To run your html:
 
 - Inside your cloned down folder, in terminal, type `pwd` to get your full file path. Copy and paste that path into your browser url and include `/index.html` to the end of that path.
 
-**To Submit** - once you've completed all the deliverables, please copy/paste your three class definitions into the `solution.js`  file. Please don't submit the lab until we give you the signal. 
+**To Submit** - once you've completed all the deliverables, please copy/paste your three class definitions into the `solution.js` file. Please don't submit the lab until we give you the signal. 
 
 ## Deliverables
 
-Build the following methods on the comment class
+Build out the following methods on the `CommentsController` class (Use ES6 syntax)
 
-+ Comment.all()
-  + should return all of the comments
-+ Comment#findImage(imageId)
-  + given an `int` for an image id, returns the image object with that id
-+ Comment#commentEl()
-  + returns a string of html
-    + html has an `li` tag with an `id` field and shows the comment
-+ Comment#build()
++ `CommentsController.prototype.addCommentFormListener()`
+  + iterates through each comment form and adds an eventlistener to trigger a function on form submit
+  + function should grab the imageId + comment and create a new Comment with those arguments
+  + execute the render function on that found image object to append the new comment
++ `CommentsController.prototype.render(commentObject)`
   + selects the appropriate `ul` for this comment to be added to
   + appends the new comment element to this `ul`
+  + Don't try to copy the `ImagesController.render` function because that is implemented different
 
-Build out the following methods on the CommentController class
+Build the following on the comment class model (Use ES6 syntax)
 
-+ CommentController#addCommentFormListener()
-  + iterates through each comment form and adds an eventlistener to trigger a function on form submit
-  + function should grab the imageId + comment and create a new Image with those arguments
-  + execute the build function on that new image object to append the new comment
++ `new Comment(comment, imageId)`
+  + should initialize with an id, image object (findImage) and commentContent (the actual text of the comment)
+  + should save new comment to Comment.all property
++ `Comment.all`
+  + should return all of the comment objects in an array
+  + a property of the Comment class
++ `Comment.prototype.findImage(imageId)`
+  + given an `int` for an image id, returns the image object with that id
+  + before return - adds current comment to image's comments property
++ `Comment.prototype.commentEl()`
+  + returns a string of html
+    + html has an `li` tag with an `id` field and shows the comment
+
+**NOTE:** All of the above will be tested thouroughly, so make sure your associations are working properly!
